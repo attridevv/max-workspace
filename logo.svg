@@ -1,12 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 60" width="80" height="60">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" width="44" height="36">
   <defs>
-    <linearGradient id="chrome" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#e8e8e8"/>
-      <stop offset="25%" stop-color="#ffffff"/>
-      <stop offset="50%" stop-color="#c0c0c0"/>
-      <stop offset="75%" stop-color="#ffffff"/>
-      <stop offset="100%" stop-color="#a0a0a0"/>
-    </linearGradient>
     <linearGradient id="redG" x1="0%" y1="0%" x2="0%" y2="100%">
       <stop offset="0%" stop-color="#ff6b6b"/>
       <stop offset="100%" stop-color="#cc2222"/>
@@ -16,13 +9,6 @@
       <stop offset="100%" stop-color="#0284c7"/>
     </linearGradient>
   </defs>
-
-  <!-- M — red -->
-  <text x="2" y="50" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="url(#redG)">M</text>
-
-  <!-- I — chrome mirror -->
-  <text x="36" y="50" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="url(#chrome)" stroke="#888" stroke-width="0.5">I</text>
-
-  <!-- W — blue -->
-  <text x="52" y="50" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="url(#blueG)">W</text>
+  <text x="0" y="62" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="68" fill="url(#redG)">M</text>
+  <text x="52" y="62" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="68" fill="url(#blueG)">W</text>
 </svg>

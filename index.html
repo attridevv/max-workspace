@@ -19,66 +19,36 @@
         <div class="brand">
           <div class="brand-left">
             <div class="logo" aria-hidden="true">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 60" width="36" height="36">
-              <defs>
-                <linearGradient id="chrome" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#e8e8e8"/>
-                  <stop offset="25%" stop-color="#ffffff"/>
-                  <stop offset="50%" stop-color="#c0c0c0"/>
-                  <stop offset="75%" stop-color="#ffffff"/>
-                  <stop offset="100%" stop-color="#a0a0a0"/>
-                </linearGradient>
-                <linearGradient id="redG" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#ff6b6b"/>
-                  <stop offset="100%" stop-color="#cc2222"/>
-                </linearGradient>
-                <linearGradient id="blueG" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#67e8f9"/>
-                  <stop offset="100%" stop-color="#0284c7"/>
-                </linearGradient>
-              </defs>
-              <text x="2" y="50" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="url(#redG)">M</text>
-              <text x="36" y="50" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="url(#chrome)" stroke="#888" stroke-width="0.5">I</text>
-              <text x="52" y="50" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="52" fill="url(#blueG)">W</text>
-            </svg>
-          </div>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 80" width="36" height="36">
+                <defs>
+                  <linearGradient id="redG" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ff6b6b"/>
+                    <stop offset="100%" stop-color="#cc2222"/>
+                  </linearGradient>
+                  <linearGradient id="blueG" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#67e8f9"/>
+                    <stop offset="100%" stop-color="#0284c7"/>
+                  </linearGradient>
+                </defs>
+                <text x="0" y="62" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="68" fill="url(#redG)">M</text>
+                <text x="52" y="62" font-family="Arial Black, Arial, sans-serif" font-weight="900" font-size="68" fill="url(#blueG)">W</text>
+              </svg>
+            </div>
             <div class="brand-title">
               <div class="name">MAX WORKSPACE</div>
-              <div class="sub" id="brandSub">SYSTEM ONLINE</div>
+              <div class="sub" id="brandSub">RANK E</div>
             </div>
           </div>
           <button class="brand-btn" id="closeSidebarBtn" type="button">CLOSE</button>
         </div>
 
         <nav class="nav" aria-label="Primary">
-          <button class="nav-btn" type="button" data-view="system" id="nav-system">
+          <button class="nav-btn active" type="button" data-view="todos" id="nav-todos">
             <div class="nav-left">
-              <div class="nav-ic">SYS</div>
+              <div class="nav-ic">TK</div>
               <div class="nav-label">
-                <div class="t">System</div>
-                <div class="d">Rank, quests, boosts</div>
-              </div>
-            </div>
-            <div class="nav-pill" id="navLevel">LV 1</div>
-          </button>
-
-          <button class="nav-btn active" type="button" data-view="notes" id="nav-notes">
-            <div class="nav-left">
-              <div class="nav-ic">NT</div>
-              <div class="nav-label">
-                <div class="t">Notes</div>
-                <div class="d">Write. Save. Reward.</div>
-              </div>
-            </div>
-            <div class="nav-pill" id="navNotes">0</div>
-          </button>
-
-          <button class="nav-btn" type="button" data-view="todos" id="nav-todos">
-            <div class="nav-left">
-              <div class="nav-ic">TD</div>
-              <div class="nav-label">
-                <div class="t">Todos</div>
-                <div class="d">Clear tasks for XP</div>
+                <div class="t">Tasks</div>
+                <div class="d">Clear tasks. Earn XP.</div>
               </div>
             </div>
             <div class="nav-pill" id="navTodos">0</div>
@@ -88,13 +58,33 @@
             <div class="nav-left">
               <div class="nav-ic">KB</div>
               <div class="nav-label">
-                <div class="t">Kanban</div>
-                <div class="d">Drag into Done</div>
+                <div class="t">Board</div>
+                <div class="d">Drag cards to Done</div>
               </div>
             </div>
             <div class="nav-pill" id="navCards">0</div>
           </button>
+
+          <button class="nav-btn" type="button" data-view="system" id="nav-system">
+            <div class="nav-left">
+              <div class="nav-ic">SP</div>
+              <div class="nav-label">
+                <div class="t">Character</div>
+                <div class="d">Profile, quests, stats</div>
+              </div>
+            </div>
+          </button>
         </nav>
+
+        <div class="sidebar-footer">
+          <div class="streak-badge">
+            <div class="streak-fire">&#x1F525;</div>
+            <div class="streak-info">
+              <div class="streak-num" id="sideStreak">0</div>
+              <div class="streak-lbl">day streak</div>
+            </div>
+          </div>
+        </div>
       </aside>
 
       <main class="content">
@@ -102,8 +92,6 @@
           <div class="hud-left">
             <div class="hud-rank" id="hudRank">E</div>
             <div class="hud-chip"><span>LV</span> <strong id="hudLevel">1</strong></div>
-            <div class="hud-chip"><span>Coins</span> <strong id="hudCoins">0</strong></div>
-            <div class="hud-chip"><span>Streak</span> <strong id="hudStreak">0</strong></div>
           </div>
 
           <div class="hud-xp">
@@ -112,76 +100,40 @@
           </div>
 
           <div class="hud-right">
+            <div class="coins-chip">
+              <span id="hudCoins">0</span> coins
+            </div>
             <button class="btn" id="menuBtn" type="button">MENU</button>
-            <button class="btn primary" id="statusBtn" type="button">STATUS</button>
           </div>
         </header>
 
-        <section class="view" id="view-notes" data-view="notes">
+        <!-- TASKS VIEW -->
+        <section class="view active" id="view-todos" data-view="todos">
           <div class="view-inner">
             <div class="view-title">
               <div>
-                <h1>Notes</h1>
-                <div class="sub">Write to build momentum. Word-count feeds quests.</div>
+                <h1>Tasks</h1>
+                <div class="sub">Complete tasks. Don't break the streak.</div>
               </div>
-              <div class="row">
-                <button class="btn primary" id="newNoteBtn" type="button">NEW NOTE</button>
-              </div>
+              <button class="btn primary" id="addTodoBtn" type="button">+ NEW TASK</button>
             </div>
 
-            <div class="grid" id="notesGrid"></div>
-          </div>
-        </section>
-
-        <section class="view" id="view-editor" data-view="editor" hidden>
-          <div class="view-inner">
-            <div class="view-title">
-              <div>
-                <h1 id="editorHeader">Note Editor</h1>
-                <div class="sub" id="editorSub">Autosaves. XP drops on real writing.</div>
-              </div>
-              <div class="row">
-                <button class="btn" id="backToNotesBtn" type="button">BACK</button>
-                <button class="btn danger" id="deleteNoteBtn" type="button">DELETE</button>
-              </div>
-            </div>
-
-            <div class="editor">
-              <div class="field">
-                <input id="noteTitle" type="text" placeholder="Untitled" />
-              </div>
-              <div class="field" style="flex:1;">
-                <textarea id="noteBody" placeholder="Start writing..."></textarea>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="view" id="view-todos" data-view="todos" hidden>
-          <div class="view-inner">
-            <div class="view-title">
-              <div>
-                <h1>Todos</h1>
-                <div class="sub">Complete tasks for XP and coins. Overdue gives bonus.</div>
-              </div>
-            </div>
-
-            <div class="row" style="margin-bottom: 12px;">
-              <input class="inp" id="todoText" type="text" placeholder="What needs to be done?" style="flex: 1; min-width: 220px;" />
+            <div class="add-row">
+              <input class="inp" id="todoText" type="text" placeholder="What needs to be done?" style="flex:1; min-width:200px;" />
               <input class="inp" id="todoDue" type="date" />
-              <button class="btn primary" id="addTodoBtn" type="button">ADD</button>
             </div>
 
             <ul class="list" id="todoList"></ul>
           </div>
         </section>
 
-        <section class="view" id="view-kanban" data-view="kanban" hidden>
+        <!-- KANBAN VIEW -->
+        <section class="view" id="view-kanban" data-view="kanban">
           <div class="view-inner">
             <div class="view-title">
               <div>
-                <h1>Kanban</h1>
-                <div class="sub">Drag cards between columns. Moving into Done awards XP once.</div>
+                <h1>Board</h1>
+                <div class="sub">Move cards across columns. Done = XP.</div>
               </div>
             </div>
 
@@ -205,62 +157,82 @@
           </div>
         </section>
 
-        <section class="view" id="view-system" data-view="system" hidden>
+        <!-- CHARACTER / SYSTEM VIEW -->
+        <section class="view" id="view-system" data-view="system">
           <div class="view-inner">
             <div class="view-title">
               <div>
-                <h1>System</h1>
-                <div class="sub">Stats, quests, achievements, focus timer.</div>
+                <h1>Character</h1>
+                <div class="sub" id="charSub">Build your stats. Unlock power.</div>
               </div>
             </div>
 
-            <div class="system">
-              <div class="panel">
-                <div class="title-row">
-                  <div class="who">
-                    <div class="n" id="playerName">Player</div>
-                    <div class="t">Title:
+            <!-- Character Sheet -->
+            <div class="char-sheet">
+              <div class="char-left">
+                <div class="char-card">
+                  <div class="char-rank-badge" id="charRank">E</div>
+                  <div class="char-name-row">
+                    <input class="char-name" id="playerName" value="Player" maxlength="20" />
+                    <div class="char-title-wrap">
+                      <span class="char-title-label">TITLE</span>
                       <select class="inline-select" id="titleSelect"></select>
                     </div>
                   </div>
-                  <div class="hud-chip">Unspent <strong id="playerSp">0</strong> SP</div>
+                  <div class="char-meta">
+                    <div class="cm">
+                      <div class="cm-v" id="charLevel">1</div>
+                      <div class="cm-l">LEVEL</div>
+                    </div>
+                    <div class="cm">
+                      <div class="cm-v" id="charStreak">0</div>
+                      <div class="cm-l">STREAK</div>
+                    </div>
+                    <div class="cm">
+                      <div class="cm-v" id="charCoins">0</div>
+                      <div class="cm-l">COINS</div>
+                    </div>
+                  </div>
+                  <div class="char-stats" id="stats"></div>
                 </div>
-
-                <div class="kv"><div class="k">Rank</div><div class="v" id="playerRank">E-Rank</div></div>
-                <div class="kv"><div class="k">Level</div><div class="v" id="playerLevel">1</div></div>
-                <div class="kv"><div class="k">XP</div><div class="v" id="playerXp">0 / 50</div></div>
-                <div class="kv"><div class="k">Coins</div><div class="v" id="playerCoins">0</div></div>
-                <div class="kv"><div class="k">Daily streak</div><div class="v" id="playerStreak">0</div></div>
-
-                <h2 style="margin-top: 12px;">Stats</h2>
-                <div class="stats" id="stats"></div>
               </div>
 
-              <div>
-                <div class="panel" style="margin-bottom: 12px;">
+              <div class="char-right">
+                <!-- Streak Alert -->
+                <div class="streak-alert" id="streakAlert">
+                  <div class="sa-icon">&#x1F525;</div>
+                  <div class="sa-text">
+                    <div class="sa-title">STREAK AT RISK</div>
+                    <div class="sa-desc">Complete a task today or lose your streak.</div>
+                  </div>
+                </div>
+
+                <!-- Daily Quests -->
+                <div class="panel">
                   <h2>Daily Quests</h2>
                   <div id="quests"></div>
                 </div>
 
-                <div class="panel" style="margin-bottom: 12px;">
-                  <h2>Focus Timer</h2>
+                <!-- Achievements -->
+                <div class="panel">
+                  <h2>Achievements</h2>
+                  <div class="ach-list" id="achievements"></div>
+                </div>
+
+                <!-- Focus Timer -->
+                <div class="panel focus-panel">
+                  <h2>Focus Dungeon</h2>
                   <div class="focus-time" id="focusTime">25:00</div>
-                  <div class="meta" id="focusSub"><span>Complete sessions to earn XP.</span><span></span></div>
                   <div class="pills">
                     <button class="pill active" id="preset25" type="button">25m</button>
                     <button class="pill" id="preset15" type="button">15m</button>
                     <button class="pill" id="preset50" type="button">50m</button>
                   </div>
                   <div class="row" style="margin-top: 10px;">
-                    <button class="btn primary" id="focusStart" type="button">START</button>
+                    <button class="btn primary" id="focusStart" type="button">ENTER</button>
                     <button class="btn" id="focusPause" type="button" disabled>PAUSE</button>
                     <button class="btn" id="focusReset" type="button">RESET</button>
                   </div>
-                </div>
-
-                <div class="panel">
-                  <h2>Achievements</h2>
-                  <div id="achievements"></div>
                 </div>
               </div>
             </div>
@@ -273,9 +245,9 @@
       <div class="modal" role="dialog" aria-modal="true" aria-labelledby="cardModalTitle">
         <h3 id="cardModalTitle">New Card</h3>
         <input type="hidden" id="cardStatus" />
-        <input class="inp" id="cardTitle" type="text" placeholder="Card title" style="width: 100%; margin-bottom: 10px;" />
-        <textarea class="inp" id="cardDesc" placeholder="Description (optional)" style="width: 100%; margin-bottom: 10px;"></textarea>
-        <select class="inp" id="cardTag" style="width: 100%;">
+        <input class="inp" id="cardTitle" type="text" placeholder="Card title" style="width:100%;margin-bottom:10px;" />
+        <textarea class="inp" id="cardDesc" placeholder="Description (optional)" style="width:100%;margin-bottom:10px;min-height:72px;"></textarea>
+        <select class="inp" id="cardTag" style="width:100%;">
           <option value="">No tag</option>
           <option value="urgent">Urgent</option>
           <option value="feature">Feature</option>
