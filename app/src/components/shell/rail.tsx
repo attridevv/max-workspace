@@ -27,7 +27,7 @@ export function Rail() {
       <nav className="flex-1 overflow-y-auto py-4" aria-label="Workspace sections">
         {links.map(([href, label, n]) => <Link key={href} href={href} aria-current={isActive(pathname, href) ? 'page' : undefined} className={cn('flex items-baseline gap-3 border-l-2 px-6 py-[9px] text-[0.9375rem] transition-colors', isActive(pathname, href) ? 'border-sage-deep bg-card text-ink' : 'border-transparent text-ink-2 hover:border-line-2 hover:text-ink')}><span className="font-mono text-[10px] tracking-[0.1em] text-ink-4">{n}</span>{label}</Link>)}
       </nav>
-      <div className="border-t border-line px-6 py-4 font-mono text-[10px] tracking-[0.1em] text-ink-4 uppercase">Local-first<br />stored on this device</div>
+      <div className="border-t border-line px-6 py-4 font-mono text-[10px] tracking-[0.1em] text-ink-4 uppercase">Local-first<br />stored on this device<a href="https://attridevv.github.io/max-workspace/" target="_blank" rel="noopener" className="mt-2 block tracking-[0.08em] text-sage-deep normal-case hover:text-ink">About the notebook →</a></div>
     </div>
   </aside>;
 }

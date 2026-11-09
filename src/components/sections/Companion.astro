@@ -95,6 +95,11 @@ const views = [
         </div>
       </div>
     </div>
+
+    <div class="comp-cta" data-reveal style="--reveal-delay: 220ms">
+      <a class="btn" href="https://max-workspace-app.vercel.app/app" target="_blank" rel="noopener">Open the companion <span class="arrow" aria-hidden="true">→</span></a>
+      <p class="annot">No account. Nothing uploaded. It runs in your browser.</p>
+    </div>
   </div>
 </section>
 
@@ -134,6 +139,8 @@ const views = [
   .toc-page { grid-area: page; color: var(--ink-4); }
   .toc-desc { grid-area: desc; margin-top: 4px; font-size: 0.875rem; color: var(--ink-3); }
   .comp-note { margin-top: 22px; }
+
+  .comp-cta { margin-top: clamp(36px, 5vw, 56px); display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
 
   .first-run { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 18px; }
   .fr-steps { list-style: none; padding: 0; margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 10px; counter-reset: fr; }
