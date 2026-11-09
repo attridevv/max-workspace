@@ -1,0 +1,80 @@
+<section class="section section--deep capture grain" id="capture">
+  <div class="container">
+    <div class="cap-head">
+      <div>
+        <p class="eyebrow" data-reveal>Quick capture</p>
+        <h2 data-reveal style="--reveal-delay: 80ms">Catch it before it disappears.</h2>
+      </div>
+      <div class="cap-lede" data-reveal style="--reveal-delay: 140ms">
+        <p class="lede">Some things cannot wait for the notebook. Capture them in seconds — tonight they go onto the page.</p>
+        <p class="annot">Thirty seconds today can become a memory five years from now.</p>
+      </div>
+    </div>
+
+    <div class="cap-grid">
+      <form class="cap-form grain" id="cap-form" data-reveal style="--reveal-delay: 100ms">
+        <label class="mono" for="cap-input">+ Capture</label>
+        <textarea id="cap-input" rows="3" maxlength="180" placeholder="The sunrise on the way to work. The idea in the shower. The thing you keep meaning to write down."></textarea>
+
+        <div class="cap-types" id="cap-types" role="group" aria-label="Type">
+          {['Highlight', 'Idea', 'Lesson', 'Memory', 'Goal', 'Observation'].map((t, i) => (
+            <button type="button" class:list={['cap-type', { active: i === 0 }]} data-type={t} aria-pressed={i === 0 ? 'true' : 'false'}>{t}</button>
+          ))}
+        </div>
+
+        <div class="cap-actions">
+          <span class="mono cap-hint" id="cap-hint">Saved in this browser only</span>
+          <button type="submit" class="btn btn--small">Capture <kbd class="kbd">enter</kbd></button>
+        </div>
+      </form>
+
+      <div class="cap-list-wrap" data-reveal style="--reveal-delay: 180ms">
+        <header class="cap-list-head">
+          <span class="mono">Captured today</span>
+          <button type="button" class="link cap-clear" id="cap-clear">Clear</button>
+        </header>
+        <ul class="cap-list" id="cap-list"></ul>
+        <p class="cap-empty annot" id="cap-empty">Nothing worth documenting today? Give it another hour.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cap-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(20px, 5vw, 72px); align-items: end; }
+  .cap-head h2 { margin-top: 36px; max-width: 18ch; }
+  .cap-lede { display: flex; flex-direction: column; gap: 12px; }
+  .cap-grid { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 4vw, 56px); align-items: start; }
+
+  .cap-form { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(20px, 2.8vw, 32px); box-shadow: var(--shadow-page); display: flex; flex-direction: column; gap: 16px; }
+  .cap-form label { color: var(--sage-deep); }
+  .cap-form textarea { width: 100%; resize: vertical; min-height: 84px; background: transparent; border: 0; border-bottom: 1px solid var(--line-2); padding: 2px 2px 12px; font-family: var(--serif); font-variation-settings: 'opsz' 20; font-size: 1.15rem; line-height: 1.5; color: var(--ink); }
+  .cap-form textarea::placeholder { color: var(--ink-4); font-style: italic; }
+  .cap-form textarea:focus { outline: none; border-bottom-color: var(--sage-deep); }
+  .cap-types { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cap-type { font-size: 0.8125rem; color: var(--ink-3); border: 1px solid var(--line); border-radius: 999px; padding: 5px 13px 6px; transition: all 0.25s var(--ease); }
+  .cap-type:hover { border-color: var(--sage); color: var(--ink); }
+  .cap-type.active { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+  .cap-actions { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 16px; }
+  .cap-hint { color: var(--ink-4); text-transform: none; letter-spacing: 0.04em; }
+  .kbd { font-family: var(--mono); font-size: 0.6875rem; opacity: 0.7; margin-left: 2px; }
+
+  .cap-list-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line-2); padding-bottom: 12px; }
+  .cap-clear { font-size: 0.8125rem; color: var(--ink-3); }
+  .cap-clear:hover { color: var(--ink); }
+  .cap-list { list-style: none; padding: 0; display: flex; flex-direction: column; }
+  .cap-item { display: grid; grid-template-columns: auto 1fr auto; gap: 14px; align-items: baseline; padding-block: 14px; border-bottom: 1px solid var(--line); animation: slip-in 0.4s var(--ease); }
+  @keyframes slip-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+  .cap-item-type { font-family: var(--mono); font-size: 0.5938rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sage-deep); background: var(--sage-tint); border-radius: 999px; padding: 4px 10px 5px; white-space: nowrap; }
+  .cap-item-text { font-family: var(--serif); font-variation-settings: 'opsz' 20; font-size: 1rem; line-height: 1.5; color: var(--ink); overflow-wrap: anywhere; }
+  .cap-item-del { font-size: 0.9rem; color: var(--ink-4); line-height: 1; padding: 2px 4px; transition: color 0.25s var(--ease); }
+  .cap-item-del:hover { color: var(--pen); }
+  .cap-empty { padding-top: 22px; color: var(--ink-3); }
+  .cap-empty[hidden] { display: none; }
+
+  @media (max-width: 900px) { .cap-head { grid-template-columns: 1fr; align-items: start; } .cap-grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  import '../../scripts/quick-capture';
+</script>

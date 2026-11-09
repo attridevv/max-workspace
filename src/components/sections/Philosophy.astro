@@ -1,0 +1,40 @@
+<section class="philosophy grain" id="philosophy">
+  <div class="container">
+    <p class="eyebrow eyebrow--light" data-reveal>The analog-first philosophy</p>
+
+    <h2 class="statement" data-reveal style="--reveal-delay: 90ms">The app isn't the point.</h2>
+
+    <div class="statement-body">
+      <p class="lede--light" data-reveal style="--reveal-delay: 160ms">
+        This system intentionally lives primarily inside a physical notebook. The website helps you
+        understand the method, set up your monthly spread, and review the months behind you. But the daily
+        act of tracking belongs away from a screen.
+      </p>
+      <p class="lede--light" data-reveal style="--reveal-delay: 220ms">
+        Your notebook shouldn't measure your productivity. It should help you notice your life — the run you
+        almost skipped, the conversation that changed your week, the idea you'd have otherwise lost.
+      </p>
+    </div>
+
+    <div class="moment" data-reveal style="--reveal-delay: 260ms">
+      <p class="moment-line">Close the app.</p>
+      <p class="moment-line moment-line--italic">Open the notebook.</p>
+    </div>
+
+    <p class="philosophy-foot mono" data-reveal>Paper first · screen second</p>
+  </div>
+</section>
+
+<style>
+  .philosophy { background: var(--ink); color: var(--paper); padding-block: clamp(96px, 13vw, 176px); }
+  .eyebrow--light { color: color-mix(in srgb, var(--paper) 62%, transparent); }
+  .eyebrow--light::before { background: var(--sage); }
+  .statement { margin-top: 36px; color: var(--paper); font-size: clamp(2.3rem, 5.2vw, 4.1rem); max-width: 16ch; }
+  .statement-body { margin-top: clamp(32px, 4vw, 52px); display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(24px, 4vw, 64px); max-width: 980px; }
+  .lede--light { color: color-mix(in srgb, var(--paper) 74%, transparent); font-size: 1.02rem; line-height: 1.7; max-width: 46ch; }
+  .moment { margin-top: clamp(64px, 9vw, 128px); border-top: 1px solid color-mix(in srgb, var(--paper) 18%, transparent); padding-top: clamp(32px, 4.4vw, 56px); }
+  .moment-line { font-family: var(--serif); font-weight: 440; font-variation-settings: 'opsz' 144; font-size: clamp(2.6rem, 7.4vw, 6.4rem); line-height: 1.04; letter-spacing: -0.02em; color: var(--paper); }
+  .moment-line--italic { font-style: italic; color: var(--sage); padding-left: clamp(24px, 7vw, 140px); }
+  .philosophy-foot { margin-top: clamp(40px, 5vw, 64px); color: color-mix(in srgb, var(--paper) 45%, transparent); letter-spacing: 0.2em; }
+  @media (max-width: 820px) { .statement-body { grid-template-columns: 1fr; } .moment-line--italic { padding-left: 0; } }
+</style>

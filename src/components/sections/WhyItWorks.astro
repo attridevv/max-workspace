@@ -1,0 +1,46 @@
+---
+const benefits = [
+  { n: '01', title: 'Clarity', body: 'See what you are actually doing instead of relying on memory. A month of small marks is more honest than a month of intentions.' },
+  { n: '02', title: 'Consistency', body: 'Small actions become visible when they are tracked over time. The grid does the reminding so you do not have to.', line: 'Small records become a big picture.' },
+  { n: '03', title: 'Reflection', body: 'Reviewing previous months reveals patterns. You begin to notice what actually moves your life — and what only feels busy.' },
+  { n: '04', title: 'Memory', body: 'Your notebooks become a physical record of your life. Not a highlight reel — the real thing, in your own handwriting.' },
+];
+---
+
+<section class="section why" id="why">
+  <div class="container">
+    <p class="eyebrow" data-reveal>Why it works</p>
+    <h2 class="why-title" data-reveal style="--reveal-delay: 80ms">
+      Four quiet returns on thirty seconds a day.
+    </h2>
+
+    <div class="benefits">
+      {benefits.map((b, i) => (
+        <article class="benefit" data-reveal style={`--reveal-delay: ${80 + i * 60}ms`}>
+          <span class="bnum mono">{b.n}</span>
+          <h3 class="btitle">{b.title}</h3>
+          <div class="bbody">
+            <p>{b.body}</p>
+            {b.line && <p class="annot bline">{b.line}</p>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .why-title { margin-top: 36px; max-width: 22ch; }
+  .benefits { margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
+  .benefit { display: grid; grid-template-columns: 4rem minmax(0, 4fr) minmax(0, 6fr); gap: clamp(16px, 3vw, 48px); align-items: start; padding-block: clamp(26px, 3.4vw, 44px); border-bottom: 1px solid var(--line); }
+  .bnum { color: var(--sage-deep); padding-top: 0.55rem; }
+  .btitle { font-family: var(--serif); font-weight: 480; font-variation-settings: 'opsz' 60; font-size: clamp(1.5rem, 2.6vw, 2.1rem); line-height: 1.15; }
+  .bbody p { color: var(--ink-2); max-width: 48ch; }
+  .bline { margin-top: 12px; font-size: 1.05rem; }
+  @media (max-width: 820px) {
+    .benefit { grid-template-columns: 2.6rem 1fr; grid-template-areas: 'num title' '. body'; gap: 10px 14px; }
+    .bnum { grid-area: num; padding-top: 0.4rem; }
+    .btitle { grid-area: title; }
+    .bbody { grid-area: body; }
+  }
+</style>

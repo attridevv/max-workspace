@@ -1,0 +1,162 @@
+---
+const chapters = [
+  {
+    id: 'jan', month: 'January', note: 'Started the notebook.', stat: '4 habits · 1 goal · 38 km run',
+    goals: ['Run 40 km — 38 / 40', 'Read every night — going'],
+    challenge: 'Sleep before midnight — 12 / 31 days. Renegotiated on day 12.',
+    highlights: ['First spread drawn. Two pages, wobbly lines.', 'Ran 5 km without stopping for the first time.', 'Bought the notebook and did not let it sit empty.'],
+    metrics: '38 km run · 1 book · 12 nights documented',
+    reflection: 'The grid is more honest than my memory. January taught me to stop planning and start marking.',
+  },
+  {
+    id: 'mar', month: 'March', note: 'The month running stuck.', stat: '5 habits · 3 goals · 74 km run',
+    goals: ['Run 60 km — 74 / 60, beat it', 'Finish Deep Work — done', 'No sugar on weekdays — 16 / 22'],
+    challenge: 'Twenty minutes of reading before bed — 27 / 31 days.',
+    highlights: ['Ran in the rain and loved it.', 'Deleted three apps and felt lighter.', 'My sister said I seem calmer.'],
+    metrics: '74 km run · 2 books · 27 nights documented',
+    reflection: 'The page said twenty-seven of thirty-one. My feelings said "I skipped a lot." The page knew better.',
+  },
+  {
+    id: 'may', month: 'May', note: 'The month I almost quit.', stat: '2 habits · 0 goals · 21 km run',
+    goals: ['Run 50 km — 21 / 50, released mid-month'],
+    challenge: 'No phone before breakfast — 9 / 31. Restarted in June.',
+    highlights: ['Traveled for a wedding. The notebook stayed home.', 'Walked a lot. Ran little. It was fine.', 'Came back to the notebook on the 24th.'],
+    metrics: '21 km run · 0 books · 8 nights documented',
+    reflection: 'Not every month is a triumph. The streak broke; the pages stayed. Paper does not punish you — it waits.',
+  },
+  {
+    id: 'jul', month: 'July', note: 'Back in the rhythm.', stat: '5 habits · 2 goals · 58 km run',
+    goals: ['Run 70 km — 58 / 70', 'Write one page a week — 3 / 4'],
+    challenge: 'Build something every day — 19 / 31 days.',
+    highlights: ['New personal best: 10 km.', 'Wrote a poem I still like.', 'Sunrise run on the 12th. Nobody else awake.'],
+    metrics: '58 km run · 1 book · 24 nights documented',
+    reflection: 'July next to May made something obvious: two good months do not erase a quiet one, and a quiet one does not erase the year.',
+  },
+  {
+    id: 'sep', month: 'September', note: 'The month you are in.', stat: '6 habits · 4 goals · 62.4 km run',
+    goals: ['Run 80 km — 62.4 / 80', 'Finish one book — done', 'Portfolio redesign — in progress', 'Save ₹15,000 — ₹11,400'],
+    challenge: 'No phone during the first 30 minutes after waking — 19 / 21 days.',
+    highlights: ['Ran 8 km before sunrise.', 'Football with friends. Legs sore, mind quiet.', 'Finished the first draft of October’s spread.'],
+    metrics: '62.4 km run · 1 book · 21 nights documented',
+    reflection: 'First 10-mile week since last winter. Sleep is the whole game — guard it.',
+  },
+];
+---
+
+<section class="section section--deep archive grain" id="archive">
+  <div class="container">
+    <div class="arch-head">
+      <div>
+        <p class="eyebrow" data-reveal>The life archive</p>
+        <h2 data-reveal style="--reveal-delay: 80ms">Your life deserves an archive.</h2>
+      </div>
+      <p class="lede" data-reveal style="--reveal-delay: 140ms">
+        When a month ends, it does not disappear — it becomes a chapter. Open any month and the year starts
+        to look less like a blur and more like a book you wrote without noticing.
+      </p>
+    </div>
+
+    <div class="arch-grid" data-reveal style="--reveal-delay: 100ms">
+      <div class="chapter-list" role="tablist" aria-label="Months of 2026">
+        <p class="mono arch-year">2026</p>
+        {chapters.map((c, i) => (
+          <button
+            type="button"
+            class:list={['chapter', { active: i === chapters.length - 1 }]}
+            role="tab"
+            id={`tab-${c.id}`}
+            aria-selected={i === chapters.length - 1 ? 'true' : 'false'}
+            aria-controls={`panel-${c.id}`}
+            data-month-tab={c.id}
+          >
+            <span class="ch-month">{c.month}</span>
+            <span class="ch-note">{c.note}</span>
+            <span class="ch-stat mono tabular">{c.stat}</span>
+          </button>
+        ))}
+      </div>
+
+      <div class="chapter-panels">
+        {chapters.map((c, i) => (
+          <article
+            class:list={['chapter-panel', { active: i === chapters.length - 1 }]}
+            role="tabpanel"
+            id={`panel-${c.id}`}
+            aria-labelledby={`tab-${c.id}`}
+            data-month-panel={c.id}
+          >
+            <header class="cp-head">
+              <h3>{c.month} 2026</h3>
+              <span class="mono">{c.note}</span>
+            </header>
+
+            <div class="cp-grid">
+              <div class="cp-block">
+                <p class="mono cp-label">Goals</p>
+                <ul class="cp-list">{c.goals.map((g) => <li>{g}</li>)}</ul>
+              </div>
+              <div class="cp-block">
+                <p class="mono cp-label">30-day challenge</p>
+                <p class="cp-text">{c.challenge}</p>
+              </div>
+              <div class="cp-block">
+                <p class="mono cp-label">Highlights</p>
+                <ul class="cp-highlights">{c.highlights.map((h) => <li>“{h}”</li>)}</ul>
+              </div>
+              <div class="cp-block">
+                <p class="mono cp-label">Metrics</p>
+                <p class="cp-text mono tabular">{c.metrics}</p>
+              </div>
+              <div class="cp-block cp-block--reflection">
+                <p class="mono cp-label">Reflection</p>
+                <p class="cp-reflection">{c.reflection}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .arch-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(20px, 5vw, 72px); align-items: end; }
+  .arch-head h2 { margin-top: 36px; max-width: 16ch; }
+  .arch-grid { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: minmax(220px, 4fr) minmax(0, 8fr); gap: clamp(22px, 3.4vw, 52px); align-items: start; }
+  .arch-year { padding-bottom: 12px; border-bottom: 1px solid var(--line-2); color: var(--ink-3); }
+  .chapter { width: 100%; text-align: left; display: grid; gap: 3px; padding: 16px 14px 16px 16px; border-bottom: 1px solid var(--line); border-left: 2px solid transparent; transition: background 0.3s var(--ease), border-color 0.3s var(--ease); }
+  .chapter:hover { background: color-mix(in srgb, var(--card) 55%, transparent); }
+  .chapter.active { border-left-color: var(--sage-deep); background: var(--card); }
+  .ch-month { font-family: var(--serif); font-size: 1.2rem; font-weight: 500; color: var(--ink); }
+  .ch-note { font-size: 0.8125rem; color: var(--ink-3); }
+  .ch-stat { margin-top: 4px; color: var(--ink-4); font-size: 0.625rem; }
+  .chapter-panels { position: relative; }
+  .chapter-panel { display: none; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(22px, 3vw, 40px); box-shadow: var(--shadow-page); background-image: radial-gradient(rgba(217, 210, 192, 0.4) 1px, transparent 1px); background-size: 15px 15px; }
+  .chapter-panel.active { display: block; animation: panel-in 0.5s var(--ease); }
+  @keyframes panel-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  .cp-head { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+  .cp-head h3 { font-family: var(--serif); font-size: 1.6rem; font-weight: 480; }
+  .cp-head .mono { color: var(--ink-3); text-transform: none; letter-spacing: 0.06em; }
+  .cp-grid { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 24px clamp(20px, 3vw, 44px); }
+  .cp-label { margin-bottom: 10px; }
+  .cp-list { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .cp-list li { font-size: 0.9375rem; color: var(--ink-2); padding-left: 16px; position: relative; }
+  .cp-list li::before { content: '·'; position: absolute; left: 2px; color: var(--sage-deep); }
+  .cp-text { font-size: 0.9375rem; color: var(--ink-2); }
+  .cp-highlights { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .cp-highlights li { font-family: var(--serif); font-style: italic; font-variation-settings: 'opsz' 20; font-size: 0.9375rem; color: var(--ink-2); }
+  .cp-block--reflection { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 20px; }
+  .cp-reflection { font-family: var(--serif); font-variation-settings: 'opsz' 30; font-size: 1.1rem; line-height: 1.6; color: var(--ink); max-width: 60ch; }
+  @media (max-width: 900px) {
+    .arch-head { grid-template-columns: 1fr; align-items: start; }
+    .arch-grid { grid-template-columns: 1fr; }
+    .chapter-list { display: flex; overflow-x: auto; gap: 8px; padding-bottom: 8px; }
+    .chapter { flex: none; width: auto; min-width: 160px; border: 1px solid var(--line); border-radius: 4px; }
+    .chapter.active { border-color: var(--sage); }
+  }
+  @media (max-width: 620px) { .cp-grid { grid-template-columns: 1fr; } }
+</style>
+
+<script>
+  import '../../scripts/archive';
+</script>

@@ -1,0 +1,144 @@
+---
+const views = [
+  { n: '01', name: 'Dashboard', desc: 'One clear next action, not a wall of numbers.' },
+  { n: '02', name: 'Monthly view', desc: 'Your current spread, on screen when you need to redraw it.' },
+  { n: '03', name: 'Habit view', desc: 'Patterns and honest consistency — no streak guilt.' },
+  { n: '04', name: 'Goals', desc: 'Monthly goals with quiet progress, marked done or released.' },
+  { n: '05', name: 'Daily highlights', desc: 'Quick entries, gathered into the month.' },
+  { n: '06', name: 'Reflections', desc: 'Longer thoughts, kept in the same place as everything else.' },
+  { n: '07', name: 'Metrics', desc: 'Optional numbers — sleep, distance, savings, anything you choose.' },
+  { n: '08', name: 'Life archive', desc: 'Every month as a chapter you can reopen.' },
+  { n: '09', name: 'Year in review', desc: 'December’s page, written from your own records.' },
+  { n: '10', name: 'Settings', desc: 'Export, print, and — eventually — optional sync.' },
+];
+---
+
+<section class="section companion grain" id="companion">
+  <div class="container">
+    <div class="comp-head">
+      <div>
+        <p class="eyebrow" data-reveal>The digital companion</p>
+        <h2 data-reveal style="--reveal-delay: 80ms">A companion, not the main event.</h2>
+      </div>
+      <p class="lede" data-reveal style="--reveal-delay: 140ms">
+        The app helps you set up the month, review the one you just finished, and see the patterns across
+        months. It never asks for more of your attention than that.
+      </p>
+    </div>
+
+    <div class="comp-grid">
+      <article class="app-window grain" data-reveal style="--reveal-delay: 100ms">
+        <header class="app-top">
+          <span class="app-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="mono">Today · 21 September</span>
+          <span class="mono dim">3 of 5 done</span>
+        </header>
+
+        <div class="app-body">
+          <div class="app-prompt">
+            <p class="mono">Today’s highlight</p>
+            <p class="app-line">Finished the first draft of October’s spread.</p>
+            <p class="annot app-saved">saved · 08:42</p>
+          </div>
+
+          <div class="app-block">
+            <div class="app-block-head"><p class="mono">This week</p><p class="mono dim">72%</p></div>
+            <div class="app-week" aria-hidden="true">
+              {Array.from({ length: 7 }, (_, i) => (
+                <div class="aw-col">
+                  <span class:list={['aw-dot', { on: [0, 1, 2, 4, 5].includes(i) }]}></span>
+                  <span class="mono aw-l">{['M', 'T', 'W', 'T', 'F', 'S', 'S'][i]}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div class="app-block">
+            <div class="app-block-head"><p class="mono">Goals</p><p class="mono dim">2 of 4</p></div>
+            <ul class="app-goals">
+              <li><span>Finish one book</span><span class="app-bar"><i style="width:100%"></i></span></li>
+              <li><span>Run 80 km</span><span class="app-bar"><i style="width:78%"></i></span></li>
+              <li><span>Save ₹15,000</span><span class="app-bar"><i style="width:76%"></i></span></li>
+            </ul>
+          </div>
+
+          <div class="app-block app-block--row">
+            <p class="mono">30-day challenge</p>
+            <p class="mono tabular">19 / 21 days</p>
+          </div>
+        </div>
+      </article>
+
+      <div class="toc" data-reveal style="--reveal-delay: 180ms">
+        <p class="mono toc-label">Contents of the companion</p>
+        <ol class="toc-list">
+          {views.map((v) => (
+            <li class="toc-row">
+              <span class="toc-name">{v.name}</span>
+              <span class="toc-dots" aria-hidden="true"></span>
+              <span class="mono toc-page tabular">{v.n}</span>
+              <span class="toc-desc">{v.desc}</span>
+            </li>
+          ))}
+        </ol>
+        <p class="comp-note annot">Everything here exists to serve the notebook — set it up, review it, then close the tab.</p>
+
+        <div class="first-run">
+          <p class="mono">First run · build your first month</p>
+          <ol class="fr-steps">
+            <li>What month are you tracking?</li>
+            <li>Choose 3–8 habits</li>
+            <li>Set 1–5 goals</li>
+            <li>Choose one 30-day challenge</li>
+            <li>Pick your optional metrics</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .comp-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(20px, 5vw, 72px); align-items: end; }
+  .comp-head h2 { margin-top: 36px; max-width: 18ch; }
+  .comp-grid { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(24px, 4vw, 64px); align-items: start; }
+
+  .app-window { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow-page); overflow: hidden; }
+  .app-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 18px; border-bottom: 1px solid var(--line); background: color-mix(in srgb, var(--paper) 60%, var(--card)); }
+  .app-dots { display: inline-flex; gap: 5px; }
+  .app-dots i { width: 7px; height: 7px; border-radius: 50%; border: 1px solid var(--line-2); }
+  .app-dots i:first-child { background: var(--sage-tint); border-color: var(--sage); }
+  .app-body { padding: clamp(18px, 2.4vw, 28px); display: flex; flex-direction: column; gap: clamp(18px, 2.4vw, 26px); }
+  .app-prompt { border-left: 2px solid var(--sage); padding-left: 16px; }
+  .app-line { margin-top: 8px; font-family: var(--serif); font-style: italic; font-variation-settings: 'opsz' 30; font-size: 1.2rem; line-height: 1.4; }
+  .app-saved { margin-top: 8px; font-size: 0.8125rem; opacity: 0.75; }
+  .app-block { border-top: 1px solid var(--line); padding-top: 16px; }
+  .app-block-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+  .app-week { margin-top: 14px; display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .aw-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .aw-dot { width: 100%; aspect-ratio: 1; max-width: 30px; border: 1px solid var(--line); border-radius: 3px; background: transparent; }
+  .aw-dot.on { background: var(--sage); border-color: var(--sage-deep); }
+  .aw-l { color: var(--ink-4); font-size: 0.5625rem; }
+  .app-goals { list-style: none; padding: 0; margin-top: 14px; display: flex; flex-direction: column; gap: 12px; }
+  .app-goals li { display: grid; grid-template-columns: minmax(0, 1fr) 120px; align-items: center; gap: 16px; font-size: 0.875rem; color: var(--ink-2); }
+  .app-bar { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .app-bar i { display: block; height: 100%; background: var(--sage); }
+  .app-block--row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .app-block--row .tabular { color: var(--sage-deep); }
+
+  .toc-label { padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .toc-list { list-style: none; padding: 0; }
+  .toc-row { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: 'name dots page' 'desc desc desc'; align-items: baseline; padding-block: 13px; border-bottom: 1px solid var(--line); }
+  .toc-name { grid-area: name; font-size: 1rem; color: var(--ink); font-weight: 450; }
+  .toc-dots { grid-area: dots; border-bottom: 1px dotted var(--line-2); margin: 0 12px; transform: translateY(-2px); }
+  .toc-page { grid-area: page; color: var(--ink-4); }
+  .toc-desc { grid-area: desc; margin-top: 4px; font-size: 0.875rem; color: var(--ink-3); }
+  .comp-note { margin-top: 22px; }
+
+  .first-run { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 18px; }
+  .fr-steps { list-style: none; padding: 0; margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px 10px; counter-reset: fr; }
+  .fr-steps li { font-size: 0.8125rem; color: var(--ink-2); border: 1px solid var(--line); border-radius: 999px; padding: 5px 14px 6px; counter-increment: fr; }
+  .fr-steps li::before { content: counter(fr); font-family: var(--mono); font-size: 0.5625rem; color: var(--sage-deep); margin-right: 8px; }
+
+  @media (max-width: 900px) { .comp-head { grid-template-columns: 1fr; align-items: start; } .comp-grid { grid-template-columns: 1fr; } }
+</style>

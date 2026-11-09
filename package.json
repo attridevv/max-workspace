@@ -1,0 +1,21 @@
+{
+  "name": "max-workspace",
+  "type": "module",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Max Workspace — optimize and document your life. Analog-first journaling system: Astro landing + Next.js companion.",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "dev:app": "npm --prefix app run dev --",
+    "build:app": "npm --prefix app run build",
+    "shots": "node scripts/shots.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.18.2"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}

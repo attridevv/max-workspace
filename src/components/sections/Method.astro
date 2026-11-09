@@ -1,0 +1,109 @@
+---
+const leftPage = [
+  { n: '01', title: 'Habit tracking', body: 'A row per habit, a column per day. One small mark for done. No streaks to defend, no notifications — just an honest grid filling up as the month passes.' },
+  { n: '02', title: 'Daily highlights', body: 'One line a day. The most meaningful thing that happened. Not a diary entry — enough to make the month remember itself.' },
+];
+
+const rightPage = [
+  { n: '03', title: 'Monthly goals', body: 'Three to five goals, written where you cannot avoid them. Marked done, halfway, or honestly abandoned.' },
+  { n: '04', title: '30-day challenge', body: 'One focused challenge per month. Thirty small squares that turn a decision into a habit.' },
+  { n: '05', title: 'Progress notes', body: 'A few lines at the end of the week. What moved, what stalled, what you learned.' },
+];
+
+const habitExamples = ['Run', 'Strength', 'Mobility', 'Reading', 'Meditation', 'Sleep 7h+', 'Water', 'Learning', 'Creative work'];
+const highlightExamples = ['Ran 8km before sunrise.', 'Had an unexpectedly good conversation.', 'Finally understood recursion.', 'Beautiful weather today.'];
+const goalExamples = ['Run 100km', 'Finish 2 books', 'Complete portfolio', 'Learn React', 'Call grandparents', 'Save ₹20,000'];
+const challengeExamples = ['No phone before breakfast.', 'Run every other day.', 'Study Japanese for 20 minutes.', 'Build something every day.'];
+---
+
+<section class="section section--deep method grain" id="method">
+  <div class="container">
+    <p class="eyebrow" data-reveal>The method</p>
+    <div class="method-head">
+      <h2 data-reveal style="--reveal-delay: 80ms">A two-page system for an entire month.</h2>
+      <p class="lede" data-reveal style="--reveal-delay: 140ms">
+        At the start of each month you draw one spread in your notebook. Left page: what you do. Right page:
+        what you're after. That's the whole system.
+      </p>
+    </div>
+
+    <div class="spread-diagram">
+      <article class="dpage" data-reveal style="--reveal-delay: 80ms">
+        <header class="dpage-head">
+          <span class="mono">Left page</span>
+          <span class="annot">what you do</span>
+        </header>
+        {leftPage.map((b) => (
+          <div class="dblock">
+            <span class="dn mono">{b.n}</span>
+            <div>
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </div>
+          </div>
+        ))}
+        <div class="examples">
+          <p class="mono ex-label">Habit examples</p>
+          <ul class="ex-list">
+            {habitExamples.map((h) => <li>{h}</li>)}
+          </ul>
+          <p class="mono ex-label second">Highlight examples</p>
+          <ul class="ex-list ex-list--serif">
+            {highlightExamples.map((h) => <li>“{h}”</li>)}
+          </ul>
+        </div>
+      </article>
+
+      <article class="dpage dpage--right" data-reveal style="--reveal-delay: 180ms">
+        <header class="dpage-head">
+          <span class="mono">Right page</span>
+          <span class="annot">what you're after</span>
+        </header>
+        {rightPage.map((b) => (
+          <div class="dblock">
+            <span class="dn mono">{b.n}</span>
+            <div>
+              <h3>{b.title}</h3>
+              <p>{b.body}</p>
+            </div>
+          </div>
+        ))}
+        <div class="examples">
+          <p class="mono ex-label">Goal examples</p>
+          <ul class="ex-list">
+            {goalExamples.map((g) => <li>{g}</li>)}
+          </ul>
+          <p class="mono ex-label second">Challenge examples</p>
+          <ul class="ex-list ex-list--serif">
+            {challengeExamples.map((c) => <li>“{c}”</li>)}
+          </ul>
+        </div>
+      </article>
+    </div>
+
+    <p class="method-aside" data-reveal>
+      <span class="tag">Remember</span>
+      <span>Track what matters. Forget the rest. You are not writing a diary — you are leaving a trail.</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .method-head { margin-top: 36px; display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(24px, 5vw, 72px); align-items: end; }
+  .spread-diagram { margin-top: clamp(48px, 6vw, 76px); display: grid; grid-template-columns: 1fr 1fr; gap: clamp(16px, 2.4vw, 30px); }
+  .dpage { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(22px, 3vw, 40px); display: flex; flex-direction: column; gap: clamp(20px, 2.6vw, 32px); box-shadow: var(--shadow-page); background-image: radial-gradient(rgba(217, 210, 192, 0.5) 1px, transparent 1px); background-size: 16px 16px; }
+  .dpage--right { border-left: 3px solid var(--paper-3); }
+  .dpage-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 14px; }
+  .dblock { display: grid; grid-template-columns: 2.2rem 1fr; gap: 14px; align-items: start; }
+  .dn { padding-top: 4px; color: var(--sage-deep); }
+  .dblock h3 { font-size: 1.15rem; }
+  .dblock p { margin-top: 8px; font-size: 0.9375rem; line-height: 1.62; color: var(--ink-2); }
+  .examples { margin-top: auto; border-top: 1px solid var(--line); padding-top: 18px; }
+  .ex-label { margin-bottom: 10px; }
+  .ex-label.second { margin-top: 18px; }
+  .ex-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 7px; }
+  .ex-list li { font-size: 0.8125rem; color: var(--ink-2); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px 5px; background: color-mix(in srgb, var(--paper) 55%, transparent); }
+  .ex-list--serif li { font-family: var(--serif); font-style: italic; font-variation-settings: 'opsz' 20; border-style: dashed; }
+  .method-aside { margin-top: clamp(32px, 4vw, 48px); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; font-size: 1rem; color: var(--ink-2); }
+  @media (max-width: 900px) { .method-head { grid-template-columns: 1fr; align-items: start; } .spread-diagram { grid-template-columns: 1fr; } }
+</style>

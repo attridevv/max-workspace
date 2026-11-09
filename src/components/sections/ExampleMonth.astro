@@ -1,0 +1,242 @@
+---
+import { month, habits, highlights, goals, challenge, metrics } from '../../data/example-month';
+
+const days = Array.from({ length: month.days }, (_, i) => i + 1);
+
+const habitStats = Object.fromEntries(
+  habits.map((h) => [h.id, { count: h.done.length, pct: Math.round((h.done.length / month.days) * 100) }])
+);
+
+const payload = {
+  month: month.label,
+  year: month.year,
+  total: month.days,
+  today: month.today,
+  highlights,
+  habits: habits.map((h) => ({ id: h.id, name: h.name, count: h.done.length, pct: habitStats[h.id].pct })),
+};
+---
+
+<section class="section example" id="example">
+  <div class="container">
+    <div class="ex-head">
+      <div>
+        <p class="eyebrow" data-reveal>Example month</p>
+        <h2 data-reveal style="--reveal-delay: 80ms">See a month filled in.</h2>
+      </div>
+      <p class="lede" data-reveal style="--reveal-delay: 140ms">
+        September 2026 — a real-looking month, not a perfect one. Click a habit to see its pattern. Click any
+        day to read what happened.
+      </p>
+    </div>
+
+    <div class="ex-grid">
+      <article class="ex-panel grain" data-reveal style="--reveal-delay: 100ms">
+        <header class="panel-head">
+          <span class="mono">Habits</span>
+          <span class="mono dim">30 days</span>
+        </header>
+
+        <div class="escroll">
+          <div class="egrid" id="egrid">
+            <div class="erow erow--head">
+              <span class="ename"></span>
+              {days.map((d) => (
+                <span class:list={['eday', { today: d === month.today }]}><span class="eday-num">{d === 1 || d % 5 === 0 ? d : ''}</span></span>
+              ))}
+            </div>
+            {habits.map((h) => (
+              <div class="erow" data-habit-row={h.id}>
+                <button type="button" class="ename" data-habit-name={h.id} aria-pressed="false">
+                  {h.name}
+                  <span class="ename-count mono tabular">{h.done.length}</span>
+                </button>
+                {days.map((d) => (
+                  <button
+                    type="button"
+                    class:list={['ecell', { on: h.done.includes(d) }]}
+                    data-habit={h.id}
+                    data-day={d}
+                    aria-label={`${h.name}, September ${d}, ${h.done.includes(d) ? 'marked' : 'not marked'}`}
+                  ></button>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <footer class="panel-foot">
+          <p class="mono hint" id="habit-stats">Click a habit name to see its pattern</p>
+          <p class="mono dim escroll-hint">scroll →</p>
+        </footer>
+      </article>
+
+      <div class="ex-side">
+        <article class="ex-panel grain" data-reveal style="--reveal-delay: 160ms">
+          <header class="panel-head"><span class="mono">Monthly goals</span></header>
+          <ul class="xgoals">
+            {goals.map((g) => (
+              <li class:list={['xgoal', { done: g.done }]}>
+                <div class="xgoal-top">
+                  <span class="xtitle">{g.text}</span>
+                  <span class="mono tabular xmeta">{g.meta}</span>
+                </div>
+                <div class="xbar" role="img" aria-label={`${g.pct} percent`}>
+                  <span class="xbar-fill" style={`width:${g.pct}%`}></span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </article>
+
+        <article class="ex-panel ex-panel--sage grain" data-reveal style="--reveal-delay: 220ms">
+          <header class="panel-head">
+            <span class="mono">30-day challenge</span>
+            <span class="mono dim">19 / 21 days</span>
+          </header>
+          <p class="xchallenge">{challenge.title}</p>
+          <div class="xticks" role="img" aria-label="Nineteen of twenty-one days held so far">
+            {days.map((d) => (
+              <span class:list={['xtick', challenge.done.includes(d) ? 'done' : challenge.missed.includes(d) ? 'missed' : 'open']}></span>
+            ))}
+          </div>
+        </article>
+
+        <article class="ex-panel grain" data-reveal style="--reveal-delay: 280ms">
+          <header class="panel-head">
+            <span class="mono">Metrics</span>
+            <span class="mono dim">optional</span>
+          </header>
+          <ul class="xmetrics">
+            {metrics.map((m) => (
+              <li><span class="mono">{m.label}</span><span class="xm-value tabular">{m.value}</span></li>
+            ))}
+          </ul>
+        </article>
+      </div>
+    </div>
+
+    <article class="reader grain" data-reveal style="--reveal-delay: 120ms">
+      <header class="reader-head">
+        <span class="mono">Daily highlights</span>
+        <span class="mono dim" id="reader-count"></span>
+      </header>
+
+      <div class="reader-body">
+        <div class="day-strip" role="group" aria-label="Choose a day">
+          {days.map((d) => (
+            <button type="button" class:list={['day-btn', { today: d === month.today }]} data-day-btn={d} aria-pressed="false" aria-label={`September ${d}`}>{d}</button>
+          ))}
+        </div>
+
+        <div class="reader-quote">
+          <p class="rq-text" id="hl-quote" aria-live="polite">—</p>
+          <p class="rq-meta">
+            <span class="mono" id="hl-date"></span>
+            <span class="annot" id="hl-note"></span>
+          </p>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<script type="application/json" id="example-data" set:html={JSON.stringify(payload)}></script>
+
+<style>
+  .ex-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(20px, 5vw, 72px); align-items: end; }
+  .ex-head h2 { margin-top: 36px; }
+
+  .ex-grid { margin-top: clamp(40px, 5vw, 60px); display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(16px, 2vw, 26px); align-items: start; }
+
+  .ex-panel { min-width: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(18px, 2.4vw, 30px); box-shadow: var(--shadow-page); background-image: radial-gradient(rgba(217, 210, 192, 0.42) 1px, transparent 1px); background-size: 15px 15px; }
+  .ex-panel--sage { background-image: none; background: color-mix(in srgb, var(--sage-tint) 45%, var(--card)); border-color: color-mix(in srgb, var(--sage) 26%, var(--line)); }
+
+  .panel-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 12px; margin-bottom: 18px; }
+  .panel-head .dim, .dim { color: var(--ink-4); }
+
+  .escroll { overflow-x: auto; max-width: 100%; scrollbar-width: thin; }
+  .egrid { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+
+  .erow { display: grid; grid-template-columns: minmax(88px, 9.4em) repeat(30, 1fr); align-items: center; gap: 5px; border-radius: 3px; padding-block: 2px; margin-block: -2px; transition: background 0.35s var(--ease), opacity 0.35s var(--ease); }
+  .erow--head { margin-bottom: 2px; }
+
+  .eday { display: flex; align-items: center; justify-content: center; line-height: 1; }
+  .eday-num { font-family: var(--mono); font-size: 0.5625rem; color: var(--ink-4); padding: 1px 3px; border-radius: 2px; transition: background 0.3s var(--ease), color 0.3s var(--ease); }
+  .eday.today .eday-num { color: var(--sage-deep); }
+  .eday.sel .eday-num { background: var(--ink); color: var(--paper); }
+
+  .ename { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; font-size: 0.8125rem; color: var(--ink-2); text-align: left; padding: 2px 6px 2px 0; transition: color 0.3s var(--ease); }
+  .ename:hover { color: var(--ink); }
+  .ename-count { font-size: 0.5625rem; color: var(--ink-4); }
+
+  .ecell { aspect-ratio: 1; padding: 0; border: 1px solid var(--grid); border-radius: 2px; background: transparent; transition: background 0.25s var(--ease), border-color 0.25s var(--ease), transform 0.25s var(--ease); }
+  .ecell:hover { border-color: var(--sage-deep); transform: scale(1.18); }
+  .ecell.on { background: var(--sage); border-color: var(--sage-deep); }
+
+  .egrid.has-focus .erow:not(.erow--head) { opacity: 0.4; }
+  .egrid.has-focus .erow.focused { opacity: 1; background: color-mix(in srgb, var(--sage-tint) 60%, transparent); }
+  .egrid.has-focus .erow.focused .ename { color: var(--ink); }
+
+  .panel-foot { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-top: 18px; border-top: 1px solid var(--line); padding-top: 12px; }
+  .hint { color: var(--sage-deep); text-transform: none; letter-spacing: 0.04em; font-size: 0.6875rem; }
+  .escroll-hint { display: none; white-space: nowrap; }
+
+  .xgoals { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 18px; }
+  .xgoal-top { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .xtitle { font-size: 0.9375rem; }
+  .xgoal.done .xtitle { color: var(--ink-3); text-decoration: line-through; text-decoration-color: var(--ink-4); }
+  .xmeta { color: var(--ink-4); flex: none; }
+  .xbar { margin-top: 8px; height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+  .xbar-fill { display: block; height: 100%; background: var(--sage); }
+  .xgoal.done .xbar-fill { background: var(--sage-deep); }
+
+  .xchallenge { font-size: 0.9375rem; color: var(--ink-2); max-width: 34ch; }
+  .xticks { margin-top: 16px; display: grid; grid-template-columns: repeat(15, 1fr); gap: 5px; }
+  .xtick { aspect-ratio: 1; border-radius: 2px; border: 1px solid var(--line-2); }
+  .xtick.done { background: var(--sage-deep); border-color: var(--sage-deep); }
+  .xtick.missed { border-color: var(--pen); background-image: linear-gradient(45deg, transparent 42%, var(--pen) 42%, var(--pen) 58%, transparent 58%); }
+  .xtick.open { border-color: var(--line); opacity: 0.5; }
+
+  .xmetrics { list-style: none; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 12px 20px; }
+  .xmetrics li { display: flex; flex-direction: column; gap: 2px; }
+  .xm-value { font-size: 0.9375rem; color: var(--ink-2); }
+
+  .reader { margin-top: clamp(16px, 2vw, 26px); background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(18px, 2.4vw, 32px); box-shadow: var(--shadow-page); background-image: radial-gradient(rgba(217, 210, 192, 0.42) 1px, transparent 1px); background-size: 15px 15px; }
+  .reader-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+  .reader-body { margin-top: 20px; display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(20px, 3vw, 48px); align-items: start; }
+
+  .day-strip { display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 5px; }
+  .day-btn { aspect-ratio: 1; min-width: 0; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 2px; background: transparent; font-family: var(--mono); font-size: 0.625rem; color: var(--ink-3); transition: background 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease); }
+  .day-btn:hover { border-color: var(--sage-deep); color: var(--ink); }
+  .day-btn.today { border-color: var(--sage); color: var(--sage-deep); }
+  .day-btn.sel { background: var(--ink); border-color: var(--ink); color: var(--paper); }
+
+  .reader-quote { border-left: 2px solid var(--sage); padding-left: clamp(16px, 2vw, 28px); min-height: 108px; display: flex; flex-direction: column; gap: 14px; justify-content: center; }
+  .rq-text { font-family: var(--serif); font-style: italic; font-variation-settings: 'opsz' 40; font-size: clamp(1.15rem, 1.9vw, 1.5rem); line-height: 1.4; color: var(--ink); transition: opacity 0.3s var(--ease); }
+  .rq-meta { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+
+  @media (max-width: 1000px) {
+    .ex-grid { grid-template-columns: minmax(0, 1fr); }
+    .ex-side { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2vw, 26px); align-items: start; }
+    .ex-side > :nth-child(3) { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 760px) {
+    .ex-head { grid-template-columns: 1fr; align-items: start; }
+    .egrid { min-width: 588px; }
+    .erow { gap: 4px; }
+    .escroll-hint { display: block; }
+    .reader-body { grid-template-columns: minmax(0, 1fr); }
+    .day-strip { grid-template-columns: repeat(10, minmax(0, 1fr)); gap: 6px; }
+  }
+
+  @media (max-width: 620px) {
+    .ex-side { grid-template-columns: minmax(0, 1fr); }
+    .ex-side > :nth-child(3) { grid-column: auto; }
+  }
+</style>
+
+<script>
+  import '../../scripts/example-month';
+</script>

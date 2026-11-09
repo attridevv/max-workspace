@@ -1,0 +1,42 @@
+---
+import SpreadHero from '../notebook/SpreadHero.astro';
+---
+
+<section class="hero grain" id="top">
+  <div class="container hero-inner">
+    <p class="eyebrow" data-reveal>An analog journaling system</p>
+    <h1 class="hero-title" data-reveal style="--reveal-delay: 80ms">
+      Optimize and <em class="display-italic">document</em> your&nbsp;life.
+    </h1>
+    <p class="lede hero-lede" data-reveal style="--reveal-delay: 160ms">
+      Max Workspace is a simple analog journaling system for habits, goals, daily highlights, ideas, and the
+      small details that would otherwise disappear.
+    </p>
+    <div class="cta-row" data-reveal style="--reveal-delay: 240ms">
+      <a class="btn" href="#start">Start your tracker <span class="arrow" aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" href="#method">See how it works</a>
+    </div>
+    <p class="annot whisper" data-reveal style="--reveal-delay: 320ms">
+      Less scrolling. More living. Keep the important parts.
+    </p>
+  </div>
+
+  <div data-reveal style="--reveal-delay: 120ms">
+    <SpreadHero />
+  </div>
+
+  <p class="mono book-caption" data-reveal>
+    The monthly spread · two pages · one month<span class="cap-extra"> · nothing to manage</span>
+  </p>
+</section>
+
+<style>
+  .hero { padding-top: clamp(56px, 7.5vw, 104px); padding-bottom: clamp(64px, 8vw, 116px); overflow: clip; }
+  .hero-inner { text-align: center; display: flex; flex-direction: column; align-items: center; }
+  .hero-title { margin-top: 26px; max-width: 15ch; }
+  .hero-lede { margin-top: 22px; max-width: 52ch; }
+  .cta-row { margin-top: 34px; display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .whisper { margin-top: 26px; color: var(--ink-3); font-size: 0.9rem; }
+  .book-caption { margin-top: 46px; text-align: center; color: var(--ink-4); letter-spacing: 0.14em; }
+  @media (max-width: 560px) { .cap-extra { display: none; } }
+</style>

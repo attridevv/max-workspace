@@ -1,0 +1,50 @@
+---
+const principles = [
+  { n: '01', title: 'Local-first', body: 'Your companion keeps everything in your own browser. No account, no upload, no "sign in to continue." The paper copy is already the real one.' },
+  { n: '02', title: 'Nothing to perform', body: 'No feed, no public profiles, no followers. There is no version of your journal designed for other people to like.' },
+  { n: '03', title: 'No unnecessary tracking', body: 'No third-party analytics, no advertising pixels, no shadow profiles. We would rather not know.' },
+  { n: '04', title: 'Portable by design', body: 'Export everything as plain readable files whenever you want. If cloud sync ever arrives, it will be opt-in and encrypted — never required.' },
+];
+---
+
+<section class="section privacy" id="privacy">
+  <div class="container">
+    <div class="priv-head">
+      <div>
+        <p class="eyebrow" data-reveal>Privacy</p>
+        <h2 data-reveal style="--reveal-delay: 80ms">Privacy is the default, not a setting.</h2>
+      </div>
+      <p class="lede" data-reveal style="--reveal-delay: 140ms">
+        A journal holds the most personal things you own — what you are afraid of, what you are trying to
+        become. That belongs to you and no one else.
+      </p>
+    </div>
+
+    <div class="principles">
+      {principles.map((p, i) => (
+        <article class="principle" data-reveal style={`--reveal-delay: ${100 + i * 60}ms`}>
+          <span class="mono pn">{p.n}</span>
+          <h3>{p.title}</h3>
+          <p>{p.body}</p>
+        </article>
+      ))}
+    </div>
+
+    <p class="priv-foot" data-reveal>
+      <span class="tag">Promise</span>
+      <span>Personal documentation should belong to the person doing the documenting.</span>
+    </p>
+  </div>
+</section>
+
+<style>
+  .priv-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(20px, 5vw, 72px); align-items: end; }
+  .priv-head h2 { margin-top: 36px; max-width: 18ch; }
+  .principles { margin-top: clamp(40px, 5vw, 64px); display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+  .principle { padding: clamp(22px, 3vw, 38px); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); display: flex; flex-direction: column; gap: 12px; }
+  .pn { color: var(--sage-deep); }
+  .principle h3 { font-size: 1.25rem; font-weight: 480; }
+  .principle p { font-size: 0.9375rem; line-height: 1.66; color: var(--ink-2); max-width: 44ch; }
+  .priv-foot { margin-top: clamp(32px, 4vw, 48px); display: flex; align-items: center; gap: 16px; flex-wrap: wrap; color: var(--ink-2); }
+  @media (max-width: 820px) { .priv-head { grid-template-columns: 1fr; align-items: start; } .principles { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,66 @@
+---
+const steps = [
+  { n: '01', title: 'Get a notebook', body: 'Dotted or grid paper, A5 or slightly larger — small enough to carry, nice enough to open. A Leuchtturm1917 or anything similar does the job. Any notebook works: a cheap one you actually use beats a beautiful one you are afraid to mark.', detail: ['Dotted or grid paper', 'A5 format', 'Comfortable to carry'] },
+  { n: '02', title: 'Create your monthly spread', body: 'On the first day of the month, draw the two-page layout: habits and highlights on the left, goals and your 30-day challenge on the right. It takes ten minutes. A ruler helps. Perfection does not.', detail: ['Left page: what you do', 'Right page: what you are after', 'Ten minutes, once a month'] },
+  { n: '03', title: 'Choose a few habits', body: 'Track three to eight meaningful habits. Do not track your entire existence. If a habit does not help you understand your life, it does not belong on the page.', detail: ['3–8 habits', 'One line a day', 'Nothing to sync, nothing to streak'] },
+  { n: '04', title: 'Review your month', body: 'At the end of the month, sit with the spread for ten minutes and answer the same five questions. Then close the notebook and start the next one.', detail: [], questions: ['What changed?', 'What worked?', 'What didn’t?', 'What did I learn?', 'What do I want to carry into next month?'] },
+];
+---
+
+<section class="section section--deep start grain" id="start">
+  <div class="container">
+    <div class="start-head">
+      <div>
+        <p class="eyebrow" data-reveal>Getting started</p>
+        <h2 data-reveal style="--reveal-delay: 80ms">Build your first month in an evening.</h2>
+      </div>
+      <p class="lede" data-reveal style="--reveal-delay: 140ms">
+        No account. No setup wizard. A notebook, a pen, and about an hour of honest thinking.
+      </p>
+    </div>
+
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li class="step" data-reveal style={`--reveal-delay: ${100 + i * 70}ms`}>
+          <span class="snum mono">{s.n}</span>
+          <div class="sbody">
+            <h3>{s.title}</h3>
+            <p>{s.body}</p>
+            {s.detail.length > 0 && (
+              <ul class="sdetail">
+                {s.detail.map((d) => (<li><span class="sdash" aria-hidden="true">—</span>{d}</li>))}
+              </ul>
+            )}
+            {s.questions && (
+              <ul class="squestions">
+                {s.questions.map((q) => <li>{q}</li>)}
+              </ul>
+            )}
+          </div>
+        </li>
+      ))}
+    </ol>
+
+    <p class="start-cta" data-reveal>
+      <a class="link" href="#example">See a month filled in <span aria-hidden="true">→</span></a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .start-head { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: clamp(20px, 5vw, 72px); align-items: end; }
+  .start-head h2 { margin-top: 36px; max-width: 20ch; }
+  .steps { list-style: none; padding: 0; margin-top: clamp(40px, 5vw, 64px); border-top: 1px solid var(--line); }
+  .step { display: grid; grid-template-columns: 4rem minmax(0, 1fr); gap: clamp(16px, 3vw, 48px); padding-block: clamp(28px, 3.6vw, 48px); border-bottom: 1px solid var(--line); }
+  .snum { color: var(--sage-deep); padding-top: 0.5rem; }
+  .sbody h3 { font-size: clamp(1.3rem, 2.2vw, 1.8rem); font-weight: 480; font-variation-settings: 'opsz' 50; }
+  .sbody p { margin-top: 12px; color: var(--ink-2); max-width: 62ch; }
+  .sdetail { list-style: none; padding: 0; margin-top: 18px; display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  .sdetail li { display: inline-flex; gap: 8px; font-family: var(--mono); font-size: 0.6875rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); }
+  .sdash { color: var(--sage); }
+  .squestions { list-style: none; padding: 0; margin-top: 20px; display: flex; flex-direction: column; gap: 8px; counter-reset: q; }
+  .squestions li { font-family: var(--serif); font-style: italic; font-variation-settings: 'opsz' 20; font-size: 1.05rem; color: var(--ink-2); counter-increment: q; }
+  .squestions li::before { content: 'q. ' counter(q); font-family: var(--mono); font-style: normal; font-size: 0.625rem; letter-spacing: 0.1em; color: var(--sage-deep); margin-right: 10px; }
+  .start-cta { margin-top: clamp(32px, 4vw, 48px); }
+  @media (max-width: 820px) { .start-head { grid-template-columns: 1fr; align-items: start; } .step { grid-template-columns: 2.6rem 1fr; gap: 14px; } }
+</style>

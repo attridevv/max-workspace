@@ -1,0 +1,62 @@
+---
+const links = [
+  { href: '#method', label: 'The method' },
+  { href: '#example', label: 'Example month' },
+  { href: '#companion', label: 'Companion' },
+  { href: '#archive', label: 'Archive' },
+  { href: '#privacy', label: 'Privacy' },
+];
+---
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="brand" aria-label="Max Workspace — home">
+      <svg class="brand-mark" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+        <rect x="3.5" y="2.5" width="17" height="19" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.4" />
+        <path d="M8 2.5v19" stroke="currentColor" stroke-width="1.4" opacity="0.35" />
+        <path d="M11.5 13l2 2 4-4.5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+      <span class="brand-name">Max&nbsp;Workspace</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Sections">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+
+    <div class="nav-cta">
+      <a href="#start" class="btn btn--small">Start your tracker</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--paper) 86%, transparent);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+  }
+  .nav.is-stuck { border-bottom-color: var(--line); }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; height: 68px; }
+  .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); flex: none; }
+  .brand-mark { color: var(--sage-deep); }
+  .brand-name { font-family: var(--serif); font-size: 1.0625rem; font-weight: 520; font-variation-settings: 'opsz' 20; letter-spacing: -0.005em; }
+  .nav-links { display: flex; align-items: center; gap: 30px; }
+  .nav-links a { font-size: 0.875rem; font-weight: 450; color: var(--ink-2); transition: color 0.3s var(--ease); }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta { flex: none; }
+  @media (max-width: 940px) { .nav-links { display: none; } }
+</style>
+
+<script>
+  const nav = document.getElementById('nav');
+  if (nav) {
+    const onScroll = () => nav.classList.toggle('is-stuck', window.scrollY > 8);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>
