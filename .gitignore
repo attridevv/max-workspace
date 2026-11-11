@@ -24,3 +24,7 @@ pnpm-debug.log*
 
 # screenshot rig output
 shots/
+
+# local agent notes
+app/AGENTS.md
+app/CLAUDE.md
